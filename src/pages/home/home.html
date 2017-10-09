@@ -3,16 +3,27 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Pokedex</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+    <ion-searchbar 
+    [(ngModel)]="searchTerm"
+    (ionInput)="filterItems()" 
+    placeholder="Type here..." >
+  </ion-searchbar>
+  <h3>Pokémons</h3>
+  <ion-item *ngFor="let pokemon of pokemons" (click)="itemSelected(pokemon)">
+    <ion-thumbnail item-left>
+      <img [src]="">
+    </ion-thumbnail>
+    <h2>{{pokemon.id}}</h2>
+    <p>{{pokemon.name}}</p>
+  </ion-item>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content
+         loadingText="Loading more Pokemons...">
+      </ion-infinite-scroll-content>
+   </ion-infinite-scroll>  
 </ion-content>
